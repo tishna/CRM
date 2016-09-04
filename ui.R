@@ -38,7 +38,8 @@ shinyUI(fluidPage(
                   "Most Recent overall rating:",
                   min = 1,
                   max = 5,
-                  value = 4)
+                  value = 4),
+                  tabPanel("Map",plotOutput("distplot5"))
     ),
    
     mainPanel (
