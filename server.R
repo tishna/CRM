@@ -6,9 +6,28 @@
 #
 
 library(shiny)
+require(data.table)
+library(maps)
+library(mapproj)
+library(geosphere)
+library(ggmap)
+library(plyr)
 
 shinyServer(function(input, output) {
 
+  output$distplot5 <- renderPlot(
+    {visited <- c("SFO", "Chennai", "Europe", "Melbourne", "Johannesbury, SA")
+    ll.visited <- geocode(visited)
+    visit.x <- ll.visited$lon
+    visit.y <- ll.visited$lat
+      #map("world", proj="albers", param=c(39,45), col="cadetblue4", fill=TRUE, bg="aquamarine3", lwd=0.8)
+      map("world", fill=TRUE, col="aquamarine3", bg="white", ylim=c(-60, 90), mar=c(0,0,0,0))
+      points(visit.x,visit.y, col="red", pch=16)
+      
+      
+      })
+
+  
   output$distPlot4<- renderPlot({
     x    <- faithful[, 2]
     bins <- seq(min(x), max(x), length.out = input$bins + 1)
